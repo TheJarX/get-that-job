@@ -1,19 +1,15 @@
 import React from "react";
 import "./App.css";
-import {
-  Box,
-  Grid,
-  Button,
-  TextField,
-  TextareaAutosize,
-} from "@material-ui/core";
+import { Box, Grid, Button, TextareaAutosize } from "@material-ui/core";
 import styled from "styled-components";
 import JobCard from "./components/JobCard";
-import logo from "./img/Logo.png";
 import heroVector from "./img/landing-1.png";
 import testimonialPic from "./img/Img Girl Flowers.png";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import Dropdown from "./components/Dropdown";
+import Navbar from "./components/Navbar";
+import TextField from "./components/TextField";
+import { Formik, Form } from "formik";
+import EmailIcon from "@material-ui/icons/Email";
+import { makeStyles } from "@material-ui/core/styles";
 
 const MainButton = styled(Button)`
   & {
@@ -48,12 +44,6 @@ const PurpleContainer = styled(Grid)`
   }
 `;
 
-const NavBarContainer = styled(Grid)`
-  border-bottom: 1px solid #bfbfbf;
-  height: 100px;
-  background: #fff;
-`;
-
 const HeroContainer = styled(Grid)`
   text-align: center;
   .hero-title {
@@ -86,6 +76,8 @@ const TestimonialsContainer = styled(Box)`
 `;
 
 const GetInTouchContainer = styled(Grid)`
+  padding-top: 100px;
+  padding-bottom: 100px;
   font-weight: bold;
   .annotation {
     font-size: 13px;
@@ -106,29 +98,23 @@ const GetInTouchContainer = styled(Grid)`
   }
 `;
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    padding: "15px",
+    color: "#fff",
+    backgroundColor: "#000",
+    "&:hover": {
+      backgroundColor: "rgba(0, 0, 0, 0.9)",
+    },
+  },
+}));
+
 function App() {
+  const classes = useStyles();
   return (
     <Box bgcolor="#F7FAFC">
       {/* NAVBAR BEGIN */}
-      <NavBarContainer container alignContent="center" justify="center">
-        <Grid item sm={10} md={10} lg={10}>
-          <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="space-between"
-          >
-            <img src={logo} />
-            <Box display="flex">
-              <Dropdown label="Sign In" items={["Recruiter", "Professional"]} />
-              <Dropdown
-                label="Sign Up"
-                items={["Recruiter", "Professional"]}
-                color="#3C2DFF"
-              />
-            </Box>
-          </Box>
-        </Grid>
-      </NavBarContainer>
+      <Navbar />
       {/* NAVABR END */}
 
       {/* HERO BEGIN */}
@@ -234,11 +220,35 @@ function App() {
             </Box>
           </Grid>
           <Grid item xs={9} sm={9} md={9} lg={4}>
-            <Box>
-              <TextField label="Your email" variant="outlined" />
-              <TextField label="Your email" variant="outlined" />
-              <TextField label="Your email" variant="outlined" />
-              <TextareaAutosize />
+            <Box width={1}>
+              <Formik initialValues={{ email: "", name: "", message: "" }}>
+                <Form>
+                  <TextField
+                    type="email"
+                    name="email"
+                    isLabeled={false}
+                    placeholder="Your email"
+                  />
+                  <TextField
+                    type="text"
+                    name="name"
+                    isLabeled={false}
+                    placeholder="Your name"
+                  />
+                  <textarea
+                    style={{
+                      width: "100%",
+                      height: "200px",
+                      maxHeight: "500px",
+                      padding: "5px",
+                    }}
+                    placeholder="Message"
+                  ></textarea>
+                  <Button startIcon={<EmailIcon />} className={classes.root}>
+                    Submit message
+                  </Button>
+                </Form>
+              </Formik>
             </Box>
           </Grid>
         </Box>

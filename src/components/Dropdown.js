@@ -1,10 +1,21 @@
 import React, { useState } from "react";
 import Box from "@material-ui/core/Box";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import styled from "styled-components";
 
+const DropdownItemContainer = styled(Box)`
+  position: relative;
+  &:hover .dropwdown-content {
+    display: block;
+  }
+
+  &:hover .dropdown-arrow-icon {
+    transform: rotate(180deg);
+  }
+`;
+
 const DropdownContainer = styled(Box)`
+  display: none;
   position: absolute;
   left: -20%;
   top: 25px;
@@ -21,46 +32,35 @@ const DropdownContainer = styled(Box)`
       color: #595959;
     }
   }
+  &: ;
 `;
 
-const ArrowIcon = ({ isActive, color = "currentColor" }) => {
+const ArrowIcon = ({ color = "currentColor" }) => {
   const style = {
     fill: color,
   };
-  return isActive ? (
-    <ExpandLessIcon style={style} />
-  ) : (
-    <ExpandMoreIcon style={style} />
-  );
+  return <ExpandMoreIcon style={style} className="dropdown-arrow-icon" />;
 };
 
 function Dropdown({ label, items, color = null }) {
-  const [dropdownIsActive, setDropdownIsActive] = useState(false);
-
-  const clickHandler = () => setDropdownIsActive(!dropdownIsActive);
-
   return (
-    <div style={{ position: "relative" }}>
+    <DropdownItemContainer>
       <Box
         display="flex"
         alignItems="center"
         style={{ cursor: "pointer", marginRight: "50px" }}
-        onClick={clickHandler}
       >
         <p style={{ userSelect: "none", color: color || "inherit" }}>{label}</p>
-        <ArrowIcon color={color} isActive={dropdownIsActive} />
+        <ArrowIcon color={color} />
       </Box>
-      {/* TODO: I tink that this isn't efficient, use css for visibiblity */}
-      {dropdownIsActive && (
-        <DropdownContainer>
-          <ul>
-            {items.map((item, idx) => (
-              <li key={idx}>{item}</li>
-            ))}
-          </ul>
-        </DropdownContainer>
-      )}
-    </div>
+      <DropdownContainer className="dropwdown-content">
+        <ul>
+          {items.map((item, idx) => (
+            <li key={idx}>{item}</li>
+          ))}
+        </ul>
+      </DropdownContainer>
+    </DropdownItemContainer>
   );
 }
 
