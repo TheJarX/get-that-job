@@ -35,14 +35,14 @@ const imgUrl =
 function JobCard() {
   return (
     <JobCardContainer>
-      <Box width="10%" mr="15px">
+      <Box width="15%" mr="15px">
         <img src={imgUrl} style={{ width: "40px", height: "40px" }} />
       </Box>
-      <Box width="50%">
+      <Box width="70%">
         <p className="job-title">Software Engineer</p>
         <p className="location">Able - Lima</p>
       </Box>
-      <Box width="40%" className="date">
+      <Box width="15%" className="date">
         <p>Today</p>
       </Box>
     </JobCardContainer>
