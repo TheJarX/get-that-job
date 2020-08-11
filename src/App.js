@@ -1,11 +1,19 @@
 import React from "react";
 import "./App.css";
-import { Box, Grid, Button } from "@material-ui/core";
+import {
+  Box,
+  Grid,
+  Button,
+  TextField,
+  TextareaAutosize,
+} from "@material-ui/core";
 import styled from "styled-components";
 import JobCard from "./components/JobCard";
 import logo from "./img/Logo.png";
 import heroVector from "./img/landing-1.png";
 import testimonialPic from "./img/Img Girl Flowers.png";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Dropdown from "./components/Dropdown";
 
 const MainButton = styled(Button)`
   & {
@@ -62,8 +70,7 @@ const HeroContainer = styled(Grid)`
 const TestimonialsContainer = styled(Box)`
   font-weight: 300;
   .testimonial-paragraph {
-    margin-top: 8px;
-    margin-bottom: 14px;
+    margin: 8px 20px 14px 20px;
     font-weight: bold;
     font-size: 36px;
     text-align: center;
@@ -78,13 +85,48 @@ const TestimonialsContainer = styled(Box)`
   }
 `;
 
+const GetInTouchContainer = styled(Grid)`
+  font-weight: bold;
+  .annotation {
+    font-size: 13px;
+    color: #999;
+    text-transform: uppercase;
+  }
+  .contact-title {
+    font-size: 46px;
+  }
+
+  .contact-subtitle {
+    font-size: 15px;
+  }
+
+  .contact-details {
+    font-weight: 300;
+    font-size: 16px;
+  }
+`;
+
 function App() {
   return (
     <Box bgcolor="#F7FAFC">
       {/* NAVBAR BEGIN */}
       <NavBarContainer container alignContent="center" justify="center">
         <Grid item sm={10} md={10} lg={10}>
-          <img src={logo} />
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+          >
+            <img src={logo} />
+            <Box display="flex">
+              <Dropdown label="Sign In" items={["Recruiter", "Professional"]} />
+              <Dropdown
+                label="Sign Up"
+                items={["Recruiter", "Professional"]}
+                color="#3C2DFF"
+              />
+            </Box>
+          </Box>
         </Grid>
       </NavBarContainer>
       {/* NAVABR END */}
@@ -155,6 +197,7 @@ function App() {
         alignItems="center"
         justifyContent="center"
         py="80px"
+        bgcolor="#fff"
       >
         <img src={testimonialPic} />
         <p className="testimonial-paragraph">
@@ -165,6 +208,42 @@ function App() {
         <p className="testimonial-author-title">Art Director</p>
       </TestimonialsContainer>
       {/* TESTIMONIALS END */}
+
+      {/* GET IN TOUCH BEGIN */}
+      <GetInTouchContainer container justify="center">
+        <Box
+          display="flex"
+          width={1}
+          justifyContent="space-around"
+          flexWrap="inherit"
+          alignItems="center"
+        >
+          <Grid item xs={9} sm={9} md={9} lg={4}>
+            <Box>
+              <p className="annotation">contacts</p>
+              <h3 className="contact-title">Get in Touch</h3>
+              <p className="contact-subtitle">
+                If you are not sure yet, shoot us a message!
+              </p>
+            </Box>
+            <Box mt="170px">
+              <p className="contact-details">hello@getthatjob.com</p>
+              <p className="contact-details">
+                Jose Galvez 692, 7th Floor. The Board
+              </p>
+            </Box>
+          </Grid>
+          <Grid item xs={9} sm={9} md={9} lg={4}>
+            <Box>
+              <TextField label="Your email" variant="outlined" />
+              <TextField label="Your email" variant="outlined" />
+              <TextField label="Your email" variant="outlined" />
+              <TextareaAutosize />
+            </Box>
+          </Grid>
+        </Box>
+      </GetInTouchContainer>
+      {/* GET IN TOUCH END */}
     </Box>
   );
 }
