@@ -5,6 +5,7 @@ import styled from "styled-components";
 import JobCard from "./components/JobCard";
 import logo from "./img/Logo.png";
 import heroVector from "./img/landing-1.png";
+import testimonialPic from "./img/Img Girl Flowers.png";
 
 const MainButton = styled(Button)`
   & {
@@ -58,6 +59,25 @@ const HeroContainer = styled(Grid)`
   }
 `;
 
+const TestimonialsContainer = styled(Box)`
+  font-weight: 300;
+  .testimonial-paragraph {
+    margin-top: 8px;
+    margin-bottom: 14px;
+    font-weight: bold;
+    font-size: 36px;
+    text-align: center;
+    max-width: 900px;
+  }
+
+  .testimonial-author {
+    font-size: 20px;
+  }
+  .testimonial-author-title {
+    font-size: 16px;
+  }
+`;
+
 function App() {
   return (
     <Box bgcolor="#F7FAFC">
@@ -88,7 +108,10 @@ function App() {
             <MainButton>Create your account now</MainButton>
           </Grid>
           <Grid item xs={9} sm={9} md={9} lg={4}>
-            <img src={heroVector} />
+            <img
+              src={heroVector}
+              style={{ width: "100%", maxWidth: "500px", height: "auto" }}
+            />
           </Grid>
         </Box>
       </HeroContainer>
@@ -124,6 +147,24 @@ function App() {
         </Box>
       </PurpleContainer>
       {/* PURPLE SECTION END */}
+
+      {/* TESTIMONIALS BEGIN */}
+      <TestimonialsContainer
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        py="80px"
+      >
+        <img src={testimonialPic} />
+        <p className="testimonial-paragraph">
+          “Amazing experience, I love it a lot. Thanks to the team I got that
+          Job, great!”
+        </p>
+        <p className="testimonial-author">Lassy Chester</p>
+        <p className="testimonial-author-title">Art Director</p>
+      </TestimonialsContainer>
+      {/* TESTIMONIALS END */}
     </Box>
   );
 }
