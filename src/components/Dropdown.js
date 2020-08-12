@@ -4,6 +4,10 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import styled from "styled-components";
 
 const DropdownItemContainer = styled(Box)`
+  margin-right: 50px;
+  &:last-child {
+    margin: 0;
+  }
   position: relative;
   &:hover .dropwdown-content {
     display: block;
@@ -45,18 +49,16 @@ const ArrowIcon = ({ color = "currentColor" }) => {
 function Dropdown({ label, items, color = null }) {
   return (
     <DropdownItemContainer>
-      <Box
-        display="flex"
-        alignItems="center"
-        style={{ cursor: "pointer", marginRight: "50px" }}
-      >
+      <Box display="flex" alignItems="center">
         <p style={{ userSelect: "none", color: color || "inherit" }}>{label}</p>
         <ArrowIcon color={color} />
       </Box>
       <DropdownContainer className="dropwdown-content">
         <ul>
           {items.map((item, idx) => (
-            <li key={idx}>{item}</li>
+            <li key={idx} onClick={item.onClick}>
+              {item.text}
+            </li>
           ))}
         </ul>
       </DropdownContainer>
