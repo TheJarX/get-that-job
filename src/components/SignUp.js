@@ -4,7 +4,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { Box } from "@material-ui/core";
 import TextField from "./TextField";
-import { MainButton } from "./StyledComponents";
+import { AllWidthMainButton } from "./StyledComponents";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -34,29 +34,41 @@ function SignUp() {
   };
 
   return (
-    <Box>
-      <Box>
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      height="70vh"
+    >
+      <Box mb="25px">
         <h1>Sign Up</h1>
         <p>As {usersType.includes(userType) ? userType : usersType[1]}</p>
       </Box>
-      <Box>
+      <Box maxWidth="250px">
         <Formik
           initialValues={initialValues}
           validationSchema={Schema}
           onSubmit={onSubmit}
         >
-          <Form>
-            <TextField name="email" label="Email" />
-            <TextField name="newPassword" label="Password" type="password" />
-            <TextField
-              name="confirmPassword"
-              label="Confirm password"
-              type="password"
-            />
-            <MainButton type="submit" style={{ textTransform: "capitalize" }}>
-              Sign Up
-            </MainButton>
-          </Form>
+          {({ isSubmitting }) => (
+            <Form>
+              <TextField name="email" label="Email" />
+              <TextField name="newPassword" label="Password" type="password" />
+              <TextField
+                name="confirmPassword"
+                label="Confirm password"
+                type="password"
+              />
+              <AllWidthMainButton
+                type="submit"
+                style={{ textTransform: "capitalize" }}
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Validating..." : "Sign Up"}
+              </AllWidthMainButton>
+            </Form>
+          )}
         </Formik>
       </Box>
     </Box>

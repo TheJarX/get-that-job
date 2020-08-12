@@ -14,3 +14,12 @@ export const MainButton = styled(Button)`
     padding: 10px 20px;
   }
 `;
+
+export const AllWidthMainButton = styled(MainButton)`
+  & {
+    width: 100%;
+  }
+  &:disabled {
+    filter: opacity(0.8);
+  }
+`;

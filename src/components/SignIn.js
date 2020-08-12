@@ -4,7 +4,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { Box } from "@material-ui/core";
 import TextField from "./TextField";
-import { MainButton } from "./StyledComponents";
+import { AllWidthMainButton } from "./StyledComponents";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -29,24 +29,36 @@ function SignIn() {
   };
 
   return (
-    <Box>
-      <Box>
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      height="70vh"
+    >
+      <Box mb="25px">
         <h1>Sign In</h1>
         <p>As {usersType.includes(userType) ? userType : usersType[1]}</p>
       </Box>
-      <Box>
+      <Box maxWidth="250px">
         <Formik
           initialValues={initialValues}
           validationSchema={Schema}
           onSubmit={onSubmit}
         >
-          <Form>
-            <TextField name="email" label="Email" />
-            <TextField name="password" label="Password" type="password" />
-            <MainButton type="submit" style={{ textTransform: "capitalize" }}>
-              Sign In
-            </MainButton>
-          </Form>
+          {({ isSubmitting }) => (
+            <Form>
+              <TextField name="email" label="Email" />
+              <TextField name="password" label="Password" type="password" />
+              <AllWidthMainButton
+                disabled={isSubmitting}
+                type="submit"
+                style={{ textTransform: "capitalize" }}
+              >
+                {isSubmitting ? "Validating..." : "Sign In"}
+              </AllWidthMainButton>
+            </Form>
+          )}
         </Formik>
       </Box>
     </Box>

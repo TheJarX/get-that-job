@@ -4,6 +4,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import styled from "styled-components";
 
 const DropdownItemContainer = styled(Box)`
+  cursor: pointer;
   margin-right: 50px;
   &:last-child {
     margin: 0;
