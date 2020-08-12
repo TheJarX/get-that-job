@@ -15,22 +15,22 @@ const NavBarContainer = styled(Grid)`
 function Navbar() {
   const history = useHistory();
 
-  const clickHandlerSignUp = () => {
-    history.push("/signup");
+  const clickHandlerSignUp = (type) => {
+    history.push({ pathname: "/signup", search: `?as=${type}` });
   };
 
-  const clickHandlerSignIn = () => {
-    history.push("/signin");
+  const clickHandlerSignIn = (type) => {
+    history.push({ pathname: "/signin", search: `?as=${type}` });
   };
 
   const linksSignIn = [
-    { text: "Recruiter", onClick: clickHandlerSignIn },
-    { text: "Professional", onClick: clickHandlerSignIn },
+    { text: "Recruiter", onClick: () => clickHandlerSignIn("recruiter") },
+    { text: "Professional", onClick: () => clickHandlerSignIn("professional") },
   ];
 
   const linksSignUp = [
-    { text: "Recruiter", onClick: clickHandlerSignUp },
-    { text: "Professional", onClick: clickHandlerSignUp },
+    { text: "Recruiter", onClick: () => clickHandlerSignUp("recruiter") },
+    { text: "Professional", onClick: () => clickHandlerSignUp("professional") },
   ];
 
   return (

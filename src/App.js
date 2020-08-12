@@ -3,6 +3,8 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Landing from "./components/Landing";
 import Navbar from "./components/Navbar";
+import SignIn from "./components/SignIn";
+import SignUp from "./components/SignUp";
 
 function App() {
   return (
@@ -13,10 +15,10 @@ function App() {
           <Landing />
         </Route>
         <Route path="/signin">
-          <h1>Login</h1>
+          <SignIn />
         </Route>
         <Route path="/signup">
-          <h1>Sign up</h1>
+          <SignUp />
         </Route>
       </Switch>
     </Router>

@@ -13,10 +13,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import {
   HeroContainer,
   PurpleContainer,
-  MainButton,
   TestimonialsContainer,
   GetInTouchContainer,
 } from "./LandingStyledComponents";
+
+import { MainButton } from "./StyledComponents";
 
 const useStyles = makeStyles((theme) => ({
   root: {
