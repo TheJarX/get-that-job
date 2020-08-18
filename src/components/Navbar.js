@@ -38,7 +38,7 @@ function Navbar() {
       <Grid item sm={10} md={10} lg={10}>
         <Box display="flex" alignItems="center" justifyContent="space-between">
           <Link to="/">
-            <img src={logo} />
+            <img src={logo} alt="" />
           </Link>
           <Box display="flex">
             <Dropdown label="Sign In" items={linksSignIn} />

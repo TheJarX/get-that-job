@@ -5,7 +5,6 @@ import Box from "@material-ui/core/Box";
 import JobCard from "./JobCard";
 import heroVector from "../img/landing-1.png";
 import testimonialPic from "../img/Img Girl Flowers.png";
-import Navbar from "./Navbar";
 import TextField from "./TextField";
 import { Formik, Form } from "formik";
 import EmailIcon from "@material-ui/icons/Email";
@@ -32,6 +31,18 @@ const useStyles = makeStyles((theme) => ({
 
 function Landing() {
   const classes = useStyles();
+  const job = {
+    title: "Software Engineer",
+    company: {
+      name: "Able",
+      logoUrl:
+        "https://media-exp1.licdn.com/dms/image/C560BAQH3yl67w-0w5Q/company-logo_200_200/0?e=2159024400&v=beta&t=deDlwPhllNSAjfGooe3lDx72DxC7ZvDZsnBn-ULzpLo",
+    },
+    location: "Lima",
+    type: "Full Time",
+    seniority: "Junior",
+    date: "2020-08-10T18:30:56.273Z",
+  };
 
   return (
     <Box bgcolor="#F7FAFC">
@@ -57,6 +68,7 @@ function Landing() {
             <img
               src={heroVector}
               style={{ width: "100%", maxWidth: "500px", height: "auto" }}
+              alt=""
             />
           </Grid>
         </Box>
@@ -86,9 +98,9 @@ function Landing() {
             </p>
           </Grid>
           <Grid item xs={9} sm={9} md={9} lg={4}>
-            <JobCard />
-            <JobCard />
-            <JobCard />
+            <JobCard small job={job} />
+            <JobCard small job={job} />
+            <JobCard small job={job} />
           </Grid>
         </Box>
       </PurpleContainer>
@@ -102,8 +114,9 @@ function Landing() {
         justifyContent="center"
         py="80px"
         bgcolor="#fff"
+        alt=""
       >
-        <img src={testimonialPic} />
+        <img src={testimonialPic} alt="" />
         <p className="testimonial-paragraph">
           “Amazing experience, I love it a lot. Thanks to the team I got that
           Job, great!”
