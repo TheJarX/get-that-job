@@ -6,7 +6,14 @@ const prefix = "job";
 export const jobsFetched = createAsyncThunk(
   prefix + "/jobsFetched",
   async () => {
-    return makeGetRequest(API_URL + "/jobs", "GET");
+    return makeGetRequest(`${API_URL}/jobs`, "GET");
+  }
+);
+
+export const jobFetched = createAsyncThunk(
+  prefix + "/jobFetched",
+  async (jobId) => {
+    return makeGetRequest(`${API_URL}/jobs/${jobId}`);
   }
 );
 
@@ -15,16 +22,23 @@ const JobsSlice = createSlice({
   initialState: {
     isFetching: true,
     jobs: null,
+    selectedJob: null,
   },
-  reducers: {},
+  reducers: {
+    isFetchingSet: (state, payload) => (state.isFetching = Boolean(payload)),
+  },
   extraReducers: {
-    [jobsFetched.fulfilled]: (state, { payload }) => {
-      state.jobs = payload;
+    [jobsFetched.fulfilled]: (state, { payload: jobs }) => {
+      state.jobs = jobs;
+      state.isFetching = false;
+    },
+    [jobFetched.fulfilled]: (state, { payload: job }) => {
+      state.selectedJob = job;
       state.isFetching = false;
     },
   },
 });
 
-// export const {} = JobsSlice.actions
+export const { isFetchingSet } = JobsSlice.actions;
 
 export default JobsSlice.reducer;

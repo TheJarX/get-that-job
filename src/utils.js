@@ -9,11 +9,9 @@ const formatPastDate = (str) => (/Today/.test(str) ? str : `${str} ago`);
 export const dateAgo = (date) => {
   const momentDate = moment(date);
   const dateDifference = momentDate.diff(moment(new Date()), "d");
-  const hoursDifference = momentDate.diff(moment(new Date()), "h");
-  console.log(momentDate.day(), moment(new Date()).day());
   if (dateDifference === 0 && momentDate.day() === moment(new Date()).day()) {
     return "Today";
-  } else if (dateDifference === -1) {
+  } else if (dateDifference <= 0 && dateDifference >= -1) {
     return "Yesterday";
   } else {
     return formatPastDate(momentDate.fromNow(true));

@@ -3,7 +3,7 @@ import Box from "@material-ui/core/Box";
 import { Backdrop, CircularProgress } from "@material-ui/core";
 import JobCard from "../../components/JobCard";
 import { useDispatch, useSelector } from "react-redux";
-import { jobsFetched } from "./JobsSlice";
+import { jobsFetched, isFetchingSet } from "./JobsSlice";
 
 function JobsList() {
   const dispatch = useDispatch();
@@ -27,12 +27,14 @@ function JobsList() {
     date: "2020-08-18T10:30:56.273Z",
   };
 
-  if (!isFetching && jobs === null)
+  if (!isFetching && jobs === null) {
+    dispatch(isFetchingSet(true));
     return (
       <Box width={1} display="flex" justifyContent="center">
         <p>No jobs to show, yet</p>
       </Box>
     );
+  }
 
   return (
     <Box>
@@ -44,7 +46,7 @@ function JobsList() {
         <p>Filters here!</p>
       </Box>
       <Box>
-        <JobCard job={job} />
+        {/* <JobCard job={job} /> */}
         {jobs && jobs.map((job) => <JobCard key={job.id} job={job} />)}
       </Box>
     </Box>

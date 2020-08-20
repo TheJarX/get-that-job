@@ -3,6 +3,7 @@ import Box from "@material-ui/core/Box";
 import styled from "styled-components";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import { getFlag, dateAgo } from "../utils";
+import { Link } from "react-router-dom";
 
 const JobCardContainer = styled(Box)`
   border-radius: 5px;
@@ -61,7 +62,7 @@ const JobCardContainer = styled(Box)`
 `;
 
 function JobCard({ job, small }) {
-  const { company, title, location, jobType, seniority, date } = job;
+  const { id, company, title, location, jobType, seniority, date } = job;
   const { name: companyName, logoUrl } = company;
 
   // useEffect(() => {
@@ -69,52 +70,54 @@ function JobCard({ job, small }) {
   // }, [location]);
 
   return (
-    <JobCardContainer>
-      <Box
-        width="auto"
-        maxWidth="15%"
-        mr="15px"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-      >
-        <img src={logoUrl} style={{ width: "40px", height: "40px" }} alt="" />
-      </Box>
-      <Box
-        display="flex"
-        width={1}
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        <Box width="70%">
-          <p className="job-title">{title}</p>
-          <Box display="flex" alignItems="center">
-            <p className="location">{`${companyName} - ${location}`}</p>
-            <img
-              className="flag"
-              src="https://restcountries.eu/data/gbr.svg"
-              alt=""
-            />
+    <Link to={`/jobs/${id}`}>
+      <JobCardContainer>
+        <Box
+          width="auto"
+          maxWidth="15%"
+          mr="15px"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <img src={logoUrl} style={{ width: "40px", height: "40px" }} alt="" />
+        </Box>
+        <Box
+          display="flex"
+          width={1}
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Box width="70%">
+            <p className="job-title">{title}</p>
+            <Box display="flex" alignItems="center">
+              <p className="location">{`${companyName} - ${location}`}</p>
+              <img
+                className="flag"
+                src="https://restcountries.eu/data/gbr.svg"
+                alt=""
+              />
+            </Box>
+          </Box>
+          <Box className="right" display="flex" justifyContent="space-evenly">
+            {!small && (
+              <>
+                <div className="money-icon">
+                  <AttachMoneyIcon />
+                </div>
+                <div className="chip">
+                  <p>{jobType}</p>
+                </div>
+                <div className="chip">
+                  <p>{seniority}</p>
+                </div>
+              </>
+            )}
+            <p className="date">{dateAgo(date)}</p>
           </Box>
         </Box>
-        <Box className="right" display="flex" justifyContent="space-evenly">
-          {!small && (
-            <>
-              <div className="money-icon">
-                <AttachMoneyIcon />
-              </div>
-              <div className="chip">
-                <p>{jobType}</p>
-              </div>
-              <div className="chip">
-                <p>{seniority}</p>
-              </div>
-            </>
-          )}
-          <p className="date">{dateAgo(date)}</p>
-        </Box>
-      </Box>
-    </JobCardContainer>
+      </JobCardContainer>
+    </Link>
   );
 }
 

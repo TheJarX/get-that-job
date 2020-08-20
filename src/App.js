@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import SignIn from "./features/auth/SignIn";
 import SignUp from "./features/auth/SignUp";
 import JobsList from "./features/jobs/JobsList";
+import JobDetails from "./features/jobs/JobDetails";
 import Layout from "./components/Layout";
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
         <Route path="/signup">
           <SignUp />
         </Route>
-        <Route path="/jobs">
+        <Route path="/jobs" exact>
           <Layout>
             <JobsList />
           </Layout>
@@ -36,6 +37,14 @@ function App() {
           <Layout>
             <h1>Profile</h1>
           </Layout>
+        </Route>
+        <Route path="/jobs/:id">
+          <Layout>
+            <JobDetails />
+          </Layout>
+        </Route>
+        <Route path="/company/:id/jobs">
+          <h1>Hey there!</h1>
         </Route>
       </Switch>
     </Router>
