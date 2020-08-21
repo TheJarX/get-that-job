@@ -42,9 +42,7 @@ function JobsList() {
         <CircularProgress color="inherit" />
       </Backdrop>
       <h1>Jobs for you</h1>
-      <Box>
-        <p>Filters here!</p>
-      </Box>
+      <Box>{/* <p>Filters here!</p> */}</Box>
       <Box>
         {/* <JobCard job={job} /> */}
         {jobs && jobs.map((job) => <JobCard key={job.id} job={job} />)}

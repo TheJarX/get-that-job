@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 
@@ -23,3 +24,20 @@ export const AllWidthMainButton = styled(MainButton)`
     filter: opacity(0.8);
   }
 `;
+
+const ChipContainer = styled.div`
+  border-radius: 100px;
+  color: #fff;
+  background: rgba(60, 45, 255, 0.69);
+  padding: 2px 10px;
+  margin-right: 10px;
+  max-width: 100px;
+  display: inline-block;
+`;
+export const Chip = ({ text }) => {
+  return (
+    <ChipContainer>
+      <p>{text}</p>
+    </ChipContainer>
+  );
+};

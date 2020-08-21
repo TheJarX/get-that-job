@@ -57,7 +57,7 @@ function Dropdown({ label, items, color = null }) {
       <DropdownContainer className="dropwdown-content">
         <ul>
           {items.map((item, idx) => (
-            <li key={idx} onClick={item.onClick}>
+            <li key={idx} onClick={item.onClick} style={item.style}>
               {item.text}
             </li>
           ))}

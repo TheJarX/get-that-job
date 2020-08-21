@@ -4,6 +4,7 @@ import styled from "styled-components";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import { getFlag, dateAgo } from "../utils";
 import { Link } from "react-router-dom";
+import { Chip } from "./StyledComponents";
 
 const JobCardContainer = styled(Box)`
   border-radius: 5px;
@@ -44,13 +45,6 @@ const JobCardContainer = styled(Box)`
       svg {
         fill: #fff;
       }
-    }
-    .chip {
-      border-radius: 100px;
-      color: #fff;
-      background: rgba(60, 45, 255, 0.69);
-      padding: 2px 10px;
-      margin-right: 10px;
     }
     .date {
       min-width: 100px;
@@ -101,17 +95,13 @@ function JobCard({ job, small }) {
           </Box>
           <Box className="right" display="flex" justifyContent="space-evenly">
             {!small && (
-              <>
+              <Box display="flex">
                 <div className="money-icon">
                   <AttachMoneyIcon />
                 </div>
-                <div className="chip">
-                  <p>{jobType}</p>
-                </div>
-                <div className="chip">
-                  <p>{seniority}</p>
-                </div>
-              </>
+                <Chip text={jobType} />
+                <Chip text={seniority} />
+              </Box>
             )}
             <p className="date">{dateAgo(date)}</p>
           </Box>

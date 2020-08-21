@@ -25,7 +25,9 @@ const JobsSlice = createSlice({
     selectedJob: null,
   },
   reducers: {
-    isFetchingSet: (state, payload) => (state.isFetching = Boolean(payload)),
+    isFetchingSet: (state, payload) => {
+      state.isFetching = Boolean(payload);
+    },
   },
   extraReducers: {
     [jobsFetched.fulfilled]: (state, { payload: jobs }) => {
