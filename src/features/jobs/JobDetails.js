@@ -10,14 +10,20 @@ import { Chip, MainButton } from "../../components/StyledComponents";
 
 const JobDetailsContainer = styled(Box)`
   .go-back-link {
-    color: #3c2dff;
-    display: flex;
-    svg {
-      margin-right: 12px;
-      margin-bottom: 27px;
+    display: inline-block;
+    p {
+      display: flex;
+      color: #3c2dff;
+      svg {
+        margin-right: 12px;
+        margin-bottom: 27px;
+      }
     }
   }
   padding-bottom: 100px;
+  section h2 {
+    margin-bottom: 12px;
+  }
 `;
 
 const Section = styled.section`
@@ -45,9 +51,9 @@ function JobDetails() {
 
   return (
     <JobDetailsContainer display="flex" width={1}>
-      <Box width={0.7}>
-        <Link to="/jobs">
-          <p className="go-back-link">
+      <Box width={0.6}>
+        <Link to="/jobs" className="go-back-link">
+          <p>
             <ArrowBackIcon />
             See more jobs
           </p>
@@ -77,9 +83,11 @@ function JobDetails() {
           <h2>About {company.name}:</h2>
           <p>{company.description}</p>
         </Section>
-        <MainButton>Get this job</MainButton>
+        <Link to={`/jobs/${id}/apply`}>
+          <MainButton>Get this job</MainButton>
+        </Link>
       </Box>
-
+      <Box width={0.1}></Box>
       <Box width={0.3}>
         <CompanyCard company={company} job={job} />
       </Box>

@@ -14,19 +14,6 @@ function JobsList() {
     dispatch(jobsFetched());
   }, []);
 
-  const job = {
-    title: "Software Engineer",
-    company: {
-      name: "Able",
-      logoUrl:
-        "https://media-exp1.licdn.com/dms/image/C560BAQH3yl67w-0w5Q/company-logo_200_200/0?e=2159024400&v=beta&t=deDlwPhllNSAjfGooe3lDx72DxC7ZvDZsnBn-ULzpLo",
-    },
-    location: "Lima",
-    jobType: "Full Time",
-    seniority: "Junior",
-    date: "2020-08-18T10:30:56.273Z",
-  };
-
   if (!isFetching && jobs === null) {
     dispatch(isFetchingSet(true));
     return (
@@ -43,10 +30,7 @@ function JobsList() {
       </Backdrop>
       <h1>Jobs for you</h1>
       <Box>{/* <p>Filters here!</p> */}</Box>
-      <Box>
-        {/* <JobCard job={job} /> */}
-        {jobs && jobs.map((job) => <JobCard key={job.id} job={job} />)}
-      </Box>
+      <Box>{jobs && jobs.map((job) => <JobCard key={job.id} job={job} />)}</Box>
     </Box>
   );
 }

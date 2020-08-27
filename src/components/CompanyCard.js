@@ -21,6 +21,11 @@ const CompanyCardContainer = styled(Box)`
     color: #000000;
     margin-bottom: 12px;
   }
+  .all-jobs-link {
+    a {
+      display: inline-block;
+    }
+  }
   p {
     display: flex;
     justify-content: center;
@@ -56,11 +61,13 @@ function CompanyCard({ company, job }) {
         </p>
         <p>Posted {jobsPosted} job(s)</p>
         <Box mt="40px">
-          <MainButton>Get this job</MainButton>
+          <Link to={`/jobs/${job.id}/apply`}>
+            <MainButton>Get this job</MainButton>
+          </Link>
         </Box>
       </Box>
       <Divider variant="middle" />
-      <Box mt="16px" textDecoration="none">
+      <Box mt="16px" className="all-jobs-link">
         <Link to={`/companies/${id}/jobs`}>
           <p>
             View all jobs <ChevronRightIcon />

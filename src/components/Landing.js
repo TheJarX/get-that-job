@@ -157,15 +157,9 @@ function Landing() {
                   <TextField
                     type="email"
                     name="email"
-                    isLabeled={false}
                     placeholder="Your email"
                   />
-                  <TextField
-                    type="text"
-                    name="name"
-                    isLabeled={false}
-                    placeholder="Your name"
-                  />
+                  <TextField type="text" name="name" placeholder="Your name" />
                   <Box>
                     <textarea
                       name="message"

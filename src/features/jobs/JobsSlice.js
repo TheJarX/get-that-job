@@ -1,5 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { makeRequest, makeGetRequest, API_URL } from "../../utils";
+import {
+  makeRequest,
+  makeRequestWithToken,
+  makeGetRequest,
+  API_URL,
+} from "../../utils";
 
 const prefix = "job";
 

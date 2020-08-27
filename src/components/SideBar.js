@@ -22,7 +22,9 @@ function SideBar({ width }) {
   return (
     <SideBarContainer
       bgcolor="#fff"
-      min-height="100vh"
+      position="sticky"
+      top="0"
+      height="100vh"
       width={width}
       display="flex"
       flexDirection="column"

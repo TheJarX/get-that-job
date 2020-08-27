@@ -74,16 +74,20 @@ export async function makeGetRequest(url, headers) {
   }
 }
 
-export async function makeRequestWithToken(
+export function makeRequestWithToken({
   url,
-  method,
-  headers,
   token,
-  body = {}
-) {
+  method = "GET",
+  headers = {},
+  body = {},
+}) {
   headers = {
     ...headers,
-    Authentication: `Bearer ${token}`,
+    Authorization: `Bearer ${token}`,
   };
-  return makeRequest(url, method, headers, body);
+  if (method.toLowerCase() === "get") {
+    return makeGetRequest(url, headers);
+  } else {
+    return makeRequest(url, method, headers, body);
+  }
 }

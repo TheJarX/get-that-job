@@ -21,12 +21,12 @@ const ErrorMessage = styled.sub`
   // text-transform: capitalize
 `;
 
-function TextField({ label, isLabeled = true, ...props }) {
+function TextField({ label = "", ...props }) {
   const [field, meta] = useField(props);
   return (
     <FieldContainer>
       <label>
-        {isLabeled && label}
+        {label}
         <StyledField {...field} {...props} error={meta.touched && meta.error} />
         {meta.touched && meta.error && (
           <ErrorMessage>{capitalizeWord(meta.error)}</ErrorMessage>

@@ -13,14 +13,15 @@ const AuthSlice = createSlice({
   initialState: {
     profileType: "",
     profileData: {
-      email: "hello@itsgerard.com",
-      experience: "Full stack software developer",
-      github_url: "123423",
-      id: 3,
-      linkedin_url: null,
-      name: "Piero",
-      phone: "Altamirano",
-      token: "BrQyCJHsogeG7e2NV_oC",
+      id: 1,
+      name: "Elon Musk",
+      email: "elon@musk.com",
+      phone: "+1 123 4567890",
+      experience:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      github_url: "",
+      linkedin_url: "",
+      token: "vp1ih6jsbStUEqHtXsnU",
     },
   },
   reducers: {},
@@ -28,6 +29,7 @@ const AuthSlice = createSlice({
     [userLogged.fulfilled]: (state, { payload: profileData }) => {
       if (!profileData.error) {
         state.profileData = profileData;
+        state.profileType = "logoUrl" in profileData ? "company" : "user";
       }
     },
   },

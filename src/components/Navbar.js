@@ -53,7 +53,7 @@ function Navbar() {
             <img src={logo} alt="" />
           </Link>
           {user ? (
-            <Dropdown label={user.name} items={userLinks} />
+            <Dropdown label={user.name.split(" ")[0]} items={userLinks} />
           ) : (
             <Box display="flex">
               <Dropdown label="Sign In" items={linksSignIn} />

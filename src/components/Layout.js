@@ -5,7 +5,7 @@ import SideBar from "./SideBar";
 function Layout({ children }) {
   return (
     <Box display="flex">
-      <SideBar width="17%" />
+      <SideBar width="230px" />
       <Box width="83%" pt="64px" px="104px">
         {children}
       </Box>

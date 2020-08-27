@@ -59,10 +59,6 @@ function JobCard({ job, small }) {
   const { id, company, title, location, jobType, seniority, date } = job;
   const { name: companyName, logoUrl } = company;
 
-  // useEffect(() => {
-  //   getFlag(location);
-  // }, [location]);
-
   return (
     <Link to={`/jobs/${id}`}>
       <JobCardContainer>
