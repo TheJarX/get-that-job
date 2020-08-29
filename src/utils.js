@@ -85,9 +85,7 @@ export function makeRequestWithToken({
     ...headers,
     Authorization: `Bearer ${token}`,
   };
-  if (method.toLowerCase() === "get") {
-    return makeGetRequest(url, headers);
-  } else {
-    return makeRequest(url, method, headers, body);
-  }
+  return method.toLowerCase() === "get"
+    ? makeGetRequest(url, headers)
+    : makeRequest(url, method, body, headers);
 }

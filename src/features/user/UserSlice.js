@@ -15,18 +15,24 @@ export const applicationsFetched = createAsyncThunk(
 
 export const jobApplied = createAsyncThunk(
   prefix + "/jobApplied",
-  // applicationData : { professionalExperience, reasons, cv}
-  async (jobId, user, applicationData) => {
-    const body = {
-      userId: user.id,
-      ...applicationData,
-    };
-    return makeRequestWithToken({
-      url: `${API_URL}/jobs/${jobId}/apply`,
-      token: user.token,
-      method: "POST",
-      body,
-    });
+  async ({ jobId, user, data }) => {
+    data.append("userId", user.id);
+
+    try {
+      const response = await fetch(`${API_URL}/jobs/${jobId}/apply`, {
+        method: "POST",
+        body: data,
+        headers: {
+          "Key-Inflection": "camel",
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      const responseData = await response.json();
+      if (!response.ok) return { error: responseData };
+      return responseData;
+    } catch (error) {
+      return { error };
+    }
   }
 );
 
@@ -36,18 +42,25 @@ const UserSlice = createSlice({
     applications: null,
     isFetching: true,
   },
-  reducers: {},
+  reducers: {
+    isFetchingSet: (state, payload) => {
+      state.isFetching = Boolean(payload);
+    },
+  },
   extraReducers: {
     [applicationsFetched.fulfilled]: (state, { payload: applications }) => {
-      state.isFetching = false;
       state.applications = applications;
+      if (applications) state.isFetching = false;
     },
     [jobApplied.fulfilled]: (state, { payload: application }) => {
-      state.applications.push(application);
+      if ("error" in application) return;
+      const applications = state.applications?.slice() || [];
+      applications.push(application);
+      return { ...state, applications };
     },
   },
 });
 
-// export const {} = UserSlice.action
+export const { isFetchingSet } = UserSlice.actions;
 
 export default UserSlice.reducer;

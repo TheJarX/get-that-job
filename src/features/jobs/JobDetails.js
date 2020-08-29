@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@material-ui/core/Box";
 import { useParams, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { jobFetched } from "./JobsSlice";
+import { jobFetched, isFetchingSet } from "./JobsSlice";
 import CompanyCard from "../../components/CompanyCard";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import styled from "styled-components";
@@ -37,18 +37,21 @@ function JobDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const isFetching = useSelector((state) => state.job.isFetching);
-  const job = useSelector((state) => state.job.selectedJob);
+  const [job, setJob] = useState(useSelector((state) => state.job.selectedJob));
 
   useEffect(() => {
-    dispatch(jobFetched(id));
+    dispatch(jobFetched(id)).then(({ payload: job }) => {
+      setJob(job);
+    });
   }, []);
 
-  if (!isFetching && job === null) return <p>No data</p>;
-  if (!job) return <p>Loading...</p>;
+  if (isFetching && !job) return <p>Loading...</p>;
+  if (!isFetching && !job) return <p>No data</p>;
 
   const { company } = job;
   const date = new Date(job.date).toString().slice(4, 10);
 
+  dispatch(isFetchingSet(true));
   return (
     <JobDetailsContainer display="flex" width={1}>
       <Box width={0.6}>

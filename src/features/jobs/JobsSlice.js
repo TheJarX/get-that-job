@@ -36,12 +36,18 @@ const JobsSlice = createSlice({
   },
   extraReducers: {
     [jobsFetched.fulfilled]: (state, { payload: jobs }) => {
-      state.jobs = jobs;
-      state.isFetching = false;
+      return {
+        ...state,
+        jobs,
+        isFetching: jobs.length ? false : state.isFetching,
+      };
     },
     [jobFetched.fulfilled]: (state, { payload: job }) => {
-      state.selectedJob = job;
-      state.isFetching = false;
+      return {
+        ...state,
+        selectedJob: job,
+        isFetching: !!job?.error,
+      };
     },
   },
 });

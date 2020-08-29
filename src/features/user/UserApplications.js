@@ -35,12 +35,6 @@ function UserApplications() {
   if (applications.length === 0 && !isFetching)
     return <p style={{ textAlign: "center" }}>There's no applications, yet</p>;
 
-  // return applications.map((application) => (
-  //   <li>
-  //     <p>{application.professionalExperience}</p>
-  //   </li>
-  // ));
-
   return (
     <>
       <h1>Your applications</h1>
